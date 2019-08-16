@@ -1,0 +1,281 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section { margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-size:100%; font-family:inherit; vertical-align:baseline; cursor:default; }
+html, body { height:100% !important; }
+article, aside, dialog, figure, footer, header, hgroup, nav, section { display:block; }
+a, a *, input, input *, select, .button span, label { cursor:pointer; }
+
+ul { list-style:none; }
+
+a, a:focus, a:hover, a:active {
+    outline: 0;
+    text-decoration: none;
+    background: none;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 25px;
+}
+
+body {
+    font-weight: 200;
+    line-height: 1.8em;
+    font-family: 'Open Sans', sans-serif;
+    color: #000;
+    font-size: 0.96em;
+    width: 100%;
+    background:#efefef;
+}
+
+body.home-page {
+  background-size: auto auto;
+  background-size: cover;
+}
+
+.scilogin-inn {
+  background: #fff;
+  min-width: 300px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: auto;
+  transition-delay: 0.5s;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  opacity: 0.97;
+}
+
+.client_logo {
+  padding: 20px 0px 55px 0px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.opensocial-logo {
+  text-align: center;
+  margin: 40px;
+  color: #dd9933;
+  font-size: 27px;
+  font-weight: 440;
+}
+
+.mylogo {
+  background: #fff;
+  padding: 20px 0px 40px 0px;
+  width: 100%;
+  text-align: center;
+}
+
+.mylogo img {
+  max-height: 75px;
+}
+
+.login-dialog {
+  display: flex;
+  min-height: 325px;
+  justify-content: center;
+  background: #ffffff;
+  font-size: 14px;
+  margin: 25px 0;
+}
+
+.login-dialog-right, .login-dialog-left {
+  color: #000;
+}
+
+.title {
+  margin-bottom: 25px;
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.scilogin-inn .login_button_container {
+  margin-left: 0px;
+}
+
+.multipage {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+}
+
+.content-login-dialog-below {
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 25px;
+  line-height: 23px;
+}
+
+.single_login {
+  width: 70%;
+  margin: 20px 0px 30px 0px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #d1d5da;
+  background: none;
+}
+
+.btn-margin {
+  margin-bottom: 8px !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.ralert {
+  color: #f95e27;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.btn-ingroups {
+  background-color: #54ae68;
+  color: #fff;
+  border-color: rgba(0,0,0,0.2);
+}
+
+.btn-ingroups:hover {
+  color: #fff;
+  background-color: #368a47;
+  border-color: rgba(0,0,0,0.2);
+}
+
+.btn-opensocial {
+  background-color: #dd9933;
+  color: #fff;
+  border-color: rgba(0,0,0,0.2);
+}
+
+.btn-opensocial:hover {
+  color: #fff;
+  background-color: #c78625;
+  border-color: rgba(0,0,0,0.2);
+}
+
+.ilabel {
+  margin-bottom: 3px;
+}
+
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         0px 0px 40px 0px #ccc;
+}
+
+.footer, .scicloud a {
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.footer img {
+  margin-top: 7px;
+}
+
+.inner-text {
+  min-height: 300px;
+}
+
+.ribon {
+  margin-top: -3px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.ribon span.site_mode {
+  background-color: #f95e27;
+  padding: 5px 8px;
+  color: #fff;
+  margin-right: 5px;
+}
+
+.tooltips {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltips .tooltiptext {
+  position: absolute;
+  visibility: hidden;
+  background-color: black;
+  max-width: 400px;
+  min-width: 300px;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px;
+  z-index: 1;
+  line-height: 18px;
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+.tooltips:hover .tooltiptext {
+  visibility: visible;
+}
+
+.onlylogin {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.only-social-login {
+  margin: 0 auto;
+}
+
+.only-social-login-btns {
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.auth_disable {
+  text-align: center;
+  font-weight: 500;
+  font-size: 22px;
+  margin: 20px 0 30px 0;
+}
+
+@media only screen and (min-width: 992px) {
+  .scilogin-inn {
+      min-width: 600px;
+  }
+  .only-social-login-btns {
+    width: 300px;
+  }
+  .login-dialog-left {
+    width: 55%;
+    height: 262px;
+    background: url(https://signup.opensocial.me/static/images/or-sep.png) right -50px no-repeat;
+  }
+  .login-dialog-right {
+    width: 45%;
+  }
+  .ascilogin-inn .alogin_button_container, .aleft-title {
+    padding-right: 35px;
+  }
+  .scilogin-inn .login_button_container {
+    width: 220px;
+    position: absolute;
+    left: 27%;
+    margin-left: -50px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  margin-top: 0px;
+}
