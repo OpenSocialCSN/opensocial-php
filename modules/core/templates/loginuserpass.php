@@ -101,11 +101,11 @@ if (isset($client['auth_options'])) {
                             if ( $client['site_mode'] == 'Open' ) {
                         ?>
                             <div class="scicloud scicloud-link-container">Not a member? <a id="linkRegister" href="https://signup.opensocial.me/?AuthState=<?php echo urlencode($_GET['AuthState']); ?>">Sign-up</a></div>
+                            <div class="scicloud scicloud-link-container"><a id="linkForgotPassword" href="https://signup.opensocial.me/forgotpass?AuthState=<?php echo urlencode($_GET['AuthState']); ?>">Reset Password</a></div>
+                            <div class="scicloud scicloud-link-container"><a id="linkForgotPassword" href="https://signup.opensocial.me/resend?AuthState=<?php echo urlencode($_GET['AuthState']); ?>">Resend Verification</a></div>
                         <?php 
                             }
                         ?>
-                        <div class="scicloud scicloud-link-container"><a id="linkForgotPassword" href="https://signup.opensocial.me/forgotpass?AuthState=<?php echo urlencode($_GET['AuthState']); ?>">Reset Password</a></div>
-                        <div class="scicloud scicloud-link-container"><a id="linkForgotPassword" href="https://signup.opensocial.me/resend?AuthState=<?php echo urlencode($_GET['AuthState']); ?>">Resend Verification</a></div>
                     </form>
 			    </div>
 		    </div>
