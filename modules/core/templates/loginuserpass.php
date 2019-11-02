@@ -39,14 +39,17 @@ if (isset($client['auth_options'])) {
     </div>
 
     <?php 
-    //echo $client['identity'];
-        if (isset($client['site_logo'])) {
+        if (isset($client['site_logo']) && $client['site_logo'] != '') {
             echo '<div class="mylogo">';
                 echo '<a href="'.$client['identity'].'"><img src='.$client['site_logo'].'></a>';
             echo '</div>';
+        } elseif ($client == NULL) {
+            echo '<div class="client_logo">';
+                echo '<img class="" src="https://signup.opensocial.me/static/logos/opensocial.png" width="182" height="40">';
+            echo '</div>';
         } else {
             echo '<div class="client_logo">';
-                echo '<a href="'.$client['identity'].'">'.parse_url($client['identity'], PHP_URL_HOST).'</a>';
+                echo '<a href="https://'.parse_url($client['identity'], PHP_URL_HOST).'">'.parse_url($client['identity'], PHP_URL_HOST).'</a>';
             echo '</div>';
         }
     ?>
@@ -201,7 +204,7 @@ if (isset($client['auth_options'])) {
 	</div>
 
     <?php
-        if (isset($client['site_bg'])) {
+        if (isset($client['site_bg']) && $client['site_bg'] != '') {
             $bg = $client['site_bg'];
         } else {
             $bg = 'https://signup.opensocial.me/static/background/'.$settings[0]['site_background'];
