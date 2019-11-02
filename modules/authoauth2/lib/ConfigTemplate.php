@@ -61,17 +61,20 @@ class ConfigTemplate
 
     const LinkedInV2 = [
         'authoauth2:LinkedInV2Auth',
+        // *** LinkedIn Endpoints ***
         'urlAuthorize' => 'https://www.linkedin.com/oauth/v2/authorization',
         'urlAccessToken' => 'https://www.linkedin.com/oauth/v2/accessToken',
-        'urlResourceOwnerDetails' => 'https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))',
+        'urlResourceOwnerDetails' => 'https://api.linkedin.com/v2/me',
         'urlResourceOwnerEmail' => 'https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))',
         //scopes are the default ones configured for your application
         'attributePrefix' => 'linkedin.',
         'scopes' => [
             'r_liteprofile',
-            'r_emailaddress'
+            // This requires additional api call to the urlResourceOwnerEmail url
+            'r_emailaddress',
         ],
         'scopeSeparator' => ' ',
+        // Improve log lines
         'label' => 'linkedin'
     ];
 
@@ -145,6 +148,21 @@ class ConfigTemplate
         'label' => 'weibo',
         // uid attribute from token response needs to be included in user details call
         'tokenFieldsToUserDetailsUrl' => ['uid' => 'uid', 'access_token' => 'access_token'],
+    ];
+
+    const Bitbucket = [
+        'authoauth2:BitbucketAuth',
+        // *** Bitbucket Endpoints ***
+        'urlAuthorize' => 'https://bitbucket.org/site/oauth2/authorize',
+        'urlAccessToken' => 'https://bitbucket.org/site/oauth2/access_token',
+        'urlResourceOwnerDetails' => 'https://api.bitbucket.org/2.0/user',
+        'urlResourceOwnerEmail' => 'https://api.bitbucket.org/2.0/user/emails',
+        //scopes are the default ones configured for your application
+        'attributePrefix' => 'bitbucket.',
+        'scopes' => ['account', 'email'],
+        'scopeSeparator' => ' ',
+        // Improve log lines
+        'label' => 'bitbucket'
     ];
 }
 // phpcs:enable

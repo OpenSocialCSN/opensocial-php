@@ -54,10 +54,8 @@ class LinkedInV2Auth extends OAuth2
          * }
          *  With 'preferredLocale' being optional
          */
-        $picture = !empty([$resourceOwnerAttributes["profilePicture"]['displayImage~']['elements'][0]['identifiers'][0]['identifier']]) ? [$resourceOwnerAttributes["profilePicture"]['displayImage~']['elements'][0]['identifiers'][0]['identifier']] : '';
         $attributes = [
-            $prefix . "id" => [$resourceOwnerAttributes["id"]],
-            $prefix . "pictureUrl" => $picture
+            $prefix . "id" => [$resourceOwnerAttributes["id"]]
         ];
         foreach (['firstName', 'lastName'] as $attributeName) {
             $value = $this->getFirstValueFromMultiLocaleString($attributeName, $resourceOwnerAttributes);
@@ -65,6 +63,7 @@ class LinkedInV2Auth extends OAuth2
                 $attributes[$prefix . $attributeName] = [$value];
             }
         }
+
 
         return $attributes;
     }
@@ -116,11 +115,6 @@ class LinkedInV2Auth extends OAuth2
             return;
         }
 
-        /* auto-follow LabLynx on LinkedIn
-        self::follow($accessToken, 2495437);
-        self::follow($accessToken, 209217);
-        */
-
         if (is_array($response) && isset($response["elements"][0]["handle~"]["emailAddress"])) {
             /**
              * A valid response for email lookups is:
@@ -141,27 +135,4 @@ class LinkedInV2Auth extends OAuth2
             );
         }
     }
-
-    private static function follow($accessToken, $nCompanyID){
-        $xml 		= "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><company><id>$nCompanyID</id></company>";
-        $params     = ["oauth2_access_token" => $accessToken]; 
-        $url        = "https://api.linkedin.com/v1/people/~/following/companies?";
-        $url       	.= http_build_query($params);
-
-        $headers = array(
-            "Content-type: text/xml",
-            "Content-length: " . strlen($xml)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$xml);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $data = curl_exec($ch); 
-        $info = curl_getinfo($ch);
-        curl_close($ch);	
-    }//follow	
-
 }

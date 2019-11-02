@@ -22,7 +22,7 @@ use SimpleSAML\Utils\HTTP;
  * Authenticate using Oauth2.
  *
  */
-class OAuth2 extends \SimpleSAML_Auth_Source
+class OAuth2 extends \SimpleSAML\Auth\Source
 {
 
 
@@ -41,8 +41,10 @@ class OAuth2 extends \SimpleSAML_Auth_Source
      */
     const DEBUG_LOG_FORMAT = "{method} {uri} {code} {req_headers_Authorization} >>>>'{req_body}' <<<<'{res_body}'";
 
+    protected static $defaultProviderClass = AdjustableGenericProvider::class;
+
     /**
-     * @var \SimpleSAML_Configuration
+     * @var \SimpleSAML\Configuration
      */
     protected $config;
 
@@ -78,7 +80,7 @@ class OAuth2 extends \SimpleSAML_Auth_Source
             $newUrl = HTTP::addURLParameters($config['urlResourceOwnerDetails'], $config['urlResourceOwnerOptions']);
             $config['urlResourceOwnerDetails'] = $newUrl;
         }
-        $this->config = \SimpleSAML_Configuration::loadFromArray($config, 'authsources:oauth2');
+        $this->config = \SimpleSAML\Configuration::loadFromArray($config, 'authsources:oauth2');
     }
 
     /**
@@ -102,12 +104,13 @@ class OAuth2 extends \SimpleSAML_Auth_Source
         // We are going to need the authId in order to retrieve this authentication source later, in the callback
         $state[self::AUTHID] = $this->getAuthId();
 
-        $stateID = \SimpleSAML_Auth_State::saveState($state, self::STAGE_INIT);
+        $stateID = \SimpleSAML\Auth\State::saveState($state, self::STAGE_INIT);
 
         $providerLabel = $this->getLabel();
         Logger::debug("authoauth2: $providerLabel saved state with stateID=$stateID");
 
         $options = $this->config->getArray('urlAuthorizeOptions', []);
+        $options = array_merge($options, $this->getAuthorizeOptionsFromState($state));
         // Add a prefix to tell we are the intended recipient for a redirect URI if the redirect URI was customized
         $options['state'] = self::STATE_PREFIX . '|' . $stateID;
         $authorizeURL = $provider->getAuthorizationUrl($options);
@@ -117,14 +120,27 @@ class OAuth2 extends \SimpleSAML_Auth_Source
     }
 
     /**
+     * Convert values from the state parameter of the authenticate call into options to the authorization request.
+     *
+     * Could be overridden in subclasses, base implementation does nothing
+     *
+     * @param array $state
+     * @return array
+     */
+    protected function getAuthorizeOptionsFromState(&$state)
+    {
+        return [];
+    }
+
+    /**
      * Get the provider to use to talk to the OAuth2 server.
      * Only visible for testing
      *
      * Since SSP may serialize Auth modules we don't assign the potentially unserializable provider to a field.
-     * @param \SimpleSAML_Configuration $config
+     * @param \SimpleSAML\Configuration $config
      * @return \League\OAuth2\Client\Provider\AbstractProvider
      */
-    public function getProvider(\SimpleSAML_Configuration $config)
+    public function getProvider(\SimpleSAML\Configuration $config)
     {
         $providerLabel = $this->getLabel();
 
@@ -154,7 +170,7 @@ class OAuth2 extends \SimpleSAML_Auth_Source
                 throw new \InvalidArgumentException("No OAuth2 provider class found for '$providerClass'.");
             }
         }
-        return new AdjustableGenericProvider($config->toArray(), $collaborators);
+        return new static::$defaultProviderClass($config->toArray(), $collaborators);
     }
 
     /**
@@ -296,7 +312,7 @@ class OAuth2 extends \SimpleSAML_Auth_Source
 
     /**
      * Get the configuration used for this filter
-     * @return \SimpleSAML_Configuration
+     * @return \SimpleSAML\Configuration
      */
     public function getConfig()
     {

@@ -11,7 +11,6 @@ if (strlen($this->data['username']) > 0) {
 $this->includeAtTemplateBase('includes/scicloud_header.php');
 
 if (isset($client['auth_options'])) {
-    //$authop = substr($client['auth_options'],1,-1);
     $authop = explode(',',$client['auth_options']);
 } else {
     $authop = '';
@@ -63,8 +62,8 @@ if (isset($client['auth_options'])) {
 				<div class="login_button_container">
                     <form action="?" method="post" name="fs" id="login-social" role="form">
                         <button id="login_button_linkedin" class="btn btn-block btn-social btn-linkedin btn-margin" type="submit" name="linkedin" source="linkedin"><span class="fa fa-linkedin"></span> Sign-in with LinkedIn</button>
-                        <button id="login_button_facebook" class="btn btn-block btn-social btn-facebook btn-margin" type="submit" name="genericFacebookTest"><span class="fa fa-facebook"></span> Sign-in with Facebook</button>
-                        <button id="login_button_google" class="btn btn-block btn-social btn-google btn-margin" type="submit" name="genericGoogleTest"><span class="fa fa-google"></span> Sign-in with Google</button>
+                        <button id="login_button_facebook" class="btn btn-block btn-social btn-facebook btn-margin" type="submit" name="facebook"><span class="fa fa-facebook"></span> Sign-in with Facebook</button>
+                        <button id="login_button_google" class="btn btn-block btn-social btn-google btn-margin" type="submit" name="google"><span class="fa fa-google"></span> Sign-in with Google</button>
                         <button id="login_button_twitter" class="btn btn-block btn-social btn-twitter btn-margin" type="submit" name="twitter"><span class="fa fa-twitter"></span> Sign-in with Twitter</button>
                         <button id="login_button_github" class="btn btn-block btn-social btn-github btn-margin" type="submit" name="gitHub"><span class="fa fa-github"></span> Sign-in with GitHub</button>
                         <?php
@@ -141,7 +140,7 @@ if (isset($client['auth_options'])) {
             }
 
             if (isset($client['email_login'])) {
-                $only_email_login = empty($authop) ? 'ogin-dialog-right onlylogin' : 'login-dialog-right col-md-6';
+                $only_email_login = empty($authop) ? 'login-dialog-right onlylogin' : 'login-dialog-right col-md-6';
             ?>
 
             <div class="<?php echo $only_email_login;?>">

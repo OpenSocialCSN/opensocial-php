@@ -42,6 +42,11 @@ Or you can install the latest from master
 
     composer require cirrusidentity/simplesamlphp-module-authoauth2:dev-master
 
+If you install into a tar ball distribution of SSP then composer, by default, will also install all `dev` dependencies for SSP and this module. This can be a long list.
+If you prefer not having dev dependencies installed, then you can use.
+
+    composer require --no-update cirrusidentity/simplesamlphp-module-authoauth2 && composer update --no-dev cirrusidentity/simplesamlphp-module-authoauth2
+
 ## Changelog
 
 [View the change log](CHANGELOG.md)
@@ -62,6 +67,7 @@ Almost all OAuth2/OIDC providers will require you to register a redirect URI. Us
 
 ## Provider specific Tips
 
+ * [Bitbucket](/docs/BITBUCKET.md)
  * [Google](/docs/GOOGLE.md)
  * [LinkedIn](/docs/LINKEDIN.md)
  * [Microsoft](/docs/MICROSOFT.md)
@@ -119,6 +125,26 @@ Generic usage provides enough configuration parameters to use with any OAuth2 or
               
           ),
 ```
+
+## OpenID Connect Usage
+
+For providers that support OpenID Connect discovery protocol the configuration can be simplified a bit. Only the issuer url, client id and client secret are required..
+```php
+       'openidconnect' => array(
+              'authoauth2:OpenIDConnect',
+              // *** Required for all integrations ***
+              'issuer' => 'https://www.example.com', # e.g https://accounts.google.com
+              'clientId' => '133972730583345',
+              'clientSecret' => '36aefb235314bad5df075363b79cbbcd',
+
+              // Most Optional settings for OAuth2 above can be used
+              // *** New Optional ***
+              // Customize post logout redirect, if you don't want to use the standard /module.php/authoauth2/loggedout.php
+              'postLogoutRedirectUri' => 'https://myapp.example.com/loggedout'
+          ),
+```
+
+If your OP supports front channel single logout, you can configure `https://hostname/SSP_PATH/module.php/authoauth2/logout.php?authSource=AUTHSOURCE` where `AUTHSOURCE` is the id of your authsource in the authsources configuration (`openidconnect` in the example above)
 
 ## Provider Specific Usage
 
