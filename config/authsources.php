@@ -88,7 +88,7 @@ $config = array(
         'sources' => array(
             'linkedin' => array(
                 'text' => array(
-                    'en' => 'Log in with LinkedIns'
+                    'en' => 'Log in with LinkedIn'
                 )
             ),
             'facebook' => array(
