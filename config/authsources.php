@@ -1,6 +1,7 @@
 <?php
 
 require_once('opensocial-config.php');
+require_once('dbinfo.php');
 
 $config = array(
 
@@ -15,8 +16,8 @@ $config = array(
     'opensocial-sql' => array(
         'sqlauth:SQL',
         'dsn' => 'mysql:host=localhost;dbname=auth',
-        'username' => $op_config['mysql']['user'],
-        'password' => $op_config['mysql']['passwd'],
+        'username' => $db_config['mysql']['user'],
+        'password' => $db_config['mysql']['passwd'],
         'query' => 'SELECT uid, firstname, lastname, givenName, email, eduPersonPrincipalName FROM users WHERE uid = :username AND AES_DECRYPT(password,"txjueumsdzkmt8jdehv4hflu24atfnh8") = :password AND status="Confirmed"'
     ),
 
