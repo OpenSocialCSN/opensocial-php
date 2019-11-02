@@ -1,4 +1,5 @@
 config/opensocial-config.php
 config/authsources_old.php
+config/dbinfo.php
 .DS_Store
 .vscode
