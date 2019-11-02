@@ -39,6 +39,7 @@ if (isset($client['auth_options'])) {
     </div>
 
     <?php 
+    //echo $client['identity'];
         if (isset($client['site_logo'])) {
             echo '<div class="mylogo">';
                 echo '<a href="'.$client['identity'].'"><img src='.$client['site_logo'].'></a>';

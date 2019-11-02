@@ -8,8 +8,7 @@
  * @package SimpleSAMLphp
  */
 
-class sspmod_opensocial_Auth_Source_OpenSocial extends SimpleSAML_Auth_Source {
-
+class sspmod_opensocial_Auth_Source_OpenSocial extends \SimpleSAML\Auth\Source {
 	/**
 	 * The key of the AuthId field in the state.
 	 */
@@ -144,7 +143,7 @@ class sspmod_opensocial_Auth_Source_OpenSocial extends SimpleSAML_Auth_Source {
 		assert(is_string($authId));
 		assert(is_array($state));
 
-		$as = SimpleSAML_Auth_Source::getById($authId);
+		$as = \SimpleSAML\Auth\Source::getById($authId);
 
 		$valid_sources = array (
 			'linkedin', 'facebook', 'google', 'github', 'twitter'
@@ -155,8 +154,13 @@ class sspmod_opensocial_Auth_Source_OpenSocial extends SimpleSAML_Auth_Source {
 		}
 		
 		/* Save the selected authentication source for the logout process. */
-		$session = SimpleSAML_Session::getSessionFromRequest();
-		$session->setData(self::SESSION_SOURCE, 'opensocial-multi', $authId, SimpleSAML_Session::DATA_TIMEOUT_SESSION_END);
+		$session = \SimpleSAML\Session::getSessionFromRequest();
+		$session->setData(
+            self::SESSION_SOURCE,
+            'opensocial-multi',
+            $authId,
+            \SimpleSAML\Session::DATA_TIMEOUT_SESSION_END
+        );
 
 		try {
 			$as->authenticate($state);
@@ -166,7 +170,8 @@ class sspmod_opensocial_Auth_Source_OpenSocial extends SimpleSAML_Auth_Source {
 			$e = new SimpleSAML_Error_UnserializableException($e);
 			SimpleSAML_Auth_State::throwException($state, $e);
 		}
-		SimpleSAML_Auth_Source::completeAuth($state);
+
+		\SimpleSAML\Auth\Source::completeAuth($state);
 	}
 
 	/**
@@ -184,10 +189,12 @@ class sspmod_opensocial_Auth_Source_OpenSocial extends SimpleSAML_Auth_Source {
 		$session = SimpleSAML_Session::getSessionFromRequest();
 		$authId = $session->getData(self::SESSION_SOURCE, $this->authId);
 
-		$source = SimpleSAML_Auth_Source::getById($authId);
+		$source = \SimpleSAML\Auth\Source::getById($authId);
+
 		if ($source === NULL) {
 			throw new Exception('Invalid authentication source during logout: ' . $source);
 		}
+		
 		/* Then, do the logout on it */
 		$source->logout($state);
 	}

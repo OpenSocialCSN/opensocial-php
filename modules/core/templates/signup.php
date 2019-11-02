@@ -19,9 +19,16 @@ $settings = json_decode($result, true);
 
 /* Get Client info */
 $path = urldecode(parse_url($_GET['AuthState'], PHP_URL_QUERY));
+
 parse_str($path, $output);
-$identity = $output['spentityid'];
-$domain = parse_url($identity, PHP_URL_HOST);
+
+if(isset($output['spentityid'])) {
+  $identity = $output['spentityid'];
+  $domain = parse_url($identity, PHP_URL_HOST);  
+} else {
+  $identity = $output['ReturnTo'];
+  $domain = parse_url($identity, PHP_URL_HOST);
+}
 
 $ch = curl_init();   
 $options = array(CURLOPT_URL => 'https://signup.opensocial.me/api/clientinfo',
