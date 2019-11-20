@@ -10,11 +10,13 @@ if (strlen($this->data['username']) > 0) {
 }
 $this->includeAtTemplateBase('includes/scicloud_header.php');
 
-if (isset($client['auth_options'])) {
+/*
+if (isset($client['auth_options']) && !empty($client['auth_options'])) {
     $authop = explode(',',$client['auth_options']);
 } else {
     $authop = '';
 }
+*/
 
 ?>
   
@@ -58,8 +60,9 @@ if (isset($client['auth_options'])) {
 
         <?php 
 
-        if (empty($authop) && !isset($client['email_login'])) {
-            ?>
+        if (!isset($client['auth_options']) && !isset($client['email_login']) || !isset($client['auth_options']) && empty($client['email_login']) || empty($client['auth_options']) && !isset($client['email_login']) || empty($client['auth_options']) && empty($client['email_login']) ) {
+
+        ?>
             <div class="col-md-12 inner-text">
 			<div class="login-dialog-left col-md-6">
 				<span class="title left-title">Sign-up / Sign-in With:</span>
@@ -116,12 +119,10 @@ if (isset($client['auth_options'])) {
             <?php
         }
         
-
-            if (!empty($authop)) {
-
-                $only_social_login = !isset($client['email_login']) ? 'only-social-login' : 'login-dialog-left col-md-6';
-                $only_social_login_btns = !isset($client['email_login']) ? 'only-social-login-btns' : 'login_button_container';
-                
+            if (!empty($client['auth_options'])) {
+                $only_social_login = !isset($client['email_login']) || empty($client['email_login']) ? 'only-social-login' : 'login-dialog-left col-md-6';
+                $only_social_login_btns = !isset($client['email_login']) || empty($client['email_login']) ? 'only-social-login-btns' : 'login_button_container';
+                $authop = explode(',',$client['auth_options']);
             ?>
                     
                 <div class="<?php echo $only_social_login;?>">
@@ -143,8 +144,8 @@ if (isset($client['auth_options'])) {
             <?php
             }
 
-            if (isset($client['email_login'])) {
-                $only_email_login = empty($authop) ? 'login-dialog-right onlylogin' : 'login-dialog-right col-md-6';
+            if (isset($client['email_login']) && !empty($client['email_login']) ) {
+                $only_email_login = empty($client['auth_options']) ? 'login-dialog-right onlylogin' : 'login-dialog-right col-md-6';
             ?>
 
             <div class="<?php echo $only_email_login;?>">
