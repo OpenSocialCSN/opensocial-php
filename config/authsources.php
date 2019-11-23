@@ -18,7 +18,7 @@ $config = array(
         'dsn' => 'mysql:host='.$db_config['mysql']['host'].';dbname='.$db_config['mysql']['db'],
         'username' => $db_config['mysql']['user'],
         'password' => $db_config['mysql']['passwd'],
-        'query' => 'SELECT uid, firstname, lastname, givenName, email, eduPersonPrincipalName FROM users WHERE uid = :username AND AES_DECRYPT(password,"txjueumsdzkmt8jdehv4hflu24atfnh8") = :password AND status="Confirmed" AND user_mode="Active"'
+        'query' => 'SELECT uid, firstname, lastname, givenName, email, eduPersonPrincipalName FROM users WHERE uid = :username AND AES_DECRYPT(password,"txjueumsdzkmt8jdehv4hflu24atfnh8") = :password AND status="Confirmed"'
     ),
 
     'linkedin' => array(
